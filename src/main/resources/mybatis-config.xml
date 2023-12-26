@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+<!--数据库配置-->
+    <properties>
+        <!--mysql数据库配置-->
+<!--    <property name="jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>-->
+<!--    <property name="jdbc.username" value="root"/>-->
+<!--    <property name="jdbc.password" value="123"/>-->
+<!--    <property name="jdbc.url"-->
+<!--              value="jdbc:mysql://192.168.2.241:3306/demo?useSSL=false&amp;useUnicode=true&amp;characterEncoding=UTF-8&amp;useLegacyDatetimeCode=false&amp;serverTimezone=Asia/Shanghai"/>-->
+
+        <!--oracle数据库配置-->
+        <property name="jdbc.driver" value="oracle.jdbc.OracleDriver"/>
+        <property name="jdbc.username" value="BOS4GD"/>
+        <property name="jdbc.password" value="123456"/>
+        <property name="jdbc.url"
+                  value="jdbc:oracle:thin:@192.168.2.88:1521/ORCL"/>
+    </properties>
+
+    <environments default="test">
+        <environment id="test">
+            <transactionManager type="JDBC"></transactionManager>
+            <dataSource type="POOLED">
+                <property name="driver" value="${jdbc.driver}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <mappers>
+        <package name="mapper"/>
+    </mappers>
+</configuration>
