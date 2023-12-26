@@ -1,0 +1,5 @@
+2023-12-26 10:40:02.730 [pool-1-thread-2] INFO  component.OracleSqlBuilderExecutor - O_GMM_PMS_GL_MK_CA_GEC_TS_PL_MON_CUST_LIST-生成建表sql成功,查看文件:/Users/theking/Documents/oracleSQL.sql
+2023-12-26 10:40:02.732 [pool-1-thread-4] INFO  component.OracleSqlBuilderExecutor - O_GMM_PMS_GL_MK_CA_PV_QPA_SUBSITY-生成建表sql成功,查看文件:/Users/theking/Documents/oracleSQL.sql
+2023-12-26 10:40:02.730 [pool-1-thread-3] INFO  component.OracleSqlBuilderExecutor - O_GMM_PMS_GL_MK_CA_GEC_TS_SG_PEM_AMT-生成建表sql成功,查看文件:/Users/theking/Documents/oracleSQL.sql
+2023-12-26 10:40:02.736 [pool-1-thread-1] INFO  component.OracleSqlBuilderExecutor - O_GMM_PMS_GL_MK_CA_PURC_QPA_SUM-生成建表sql成功,查看文件:/Users/theking/Documents/oracleSQL.sql
+2023-12-26 10:40:02.741 [pool-1-thread-5] INFO  component.OracleSqlBuilderExecutor - O_GMM_PMS_GL_MK_CA_AMT_NOTI_DET-生成建表sql成功,查看文件:/Users/theking/Documents/oracleSQL.sql
