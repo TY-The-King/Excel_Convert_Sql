@@ -30,8 +30,8 @@ public class ExcelDataTranslateTableTool {
                 if (StringUtils.isEmpty(data.get(0)[0])) {
                     throw new Exception("无法从excel数据中获取到表名");
                 }
-                table.setTableName(data.get(0)[0]);
-                table.setTableComment(data.get(0)[1]);
+                table.setTableName(data.get(0)[3]);
+                table.setTableComment(data.get(0)[5]);
                 Column column = getColumn(data.get(0));
                 if (column != null) {
                     table.getColumnList().add(column);
@@ -57,13 +57,13 @@ public class ExcelDataTranslateTableTool {
 
         Column column = new Column();
         //获取列名
-        column.setColumnName(data[2]);
-        //获取字段类型
-        column.setColumnType(data[3]);
-        //获取字段长度
-        column.setColumnLength(data[4]);
+        column.setColumnName(data[7]);
         //获取字段描述
-        column.setColumnComment(data[5]);
+        column.setColumnComment(data[8]);
+        //获取字段类型
+        column.setColumnType(data[9]);
+        //获取字段长度
+        column.setColumnLength(data[10]);
         return column;
     }
 

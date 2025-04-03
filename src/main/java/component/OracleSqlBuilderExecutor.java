@@ -11,6 +11,8 @@ import util.FieldType;
 import util.WriteTxtTool;
 
 import java.lang.reflect.Array;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -39,15 +41,15 @@ public class OracleSqlBuilderExecutor extends AbstractSqlBuilderExecutor {
         StringBuilder createTableBuilder = new StringBuilder(1000);
         List<String> commentList = new ArrayList<>();
         String tableName = table.getTableName().toUpperCase();
-        createTableBuilder.append("create table \"" + tableName + "\"");
+        createTableBuilder.append("create table \"").append(tableName).append("\"");
         createTableBuilder.append(" ( ");
         for (Column column : table.getColumnList()) {
             createTableBuilder.append(String.format(columnTemplate, column.getColumnName()));
             //有的数据类型可以不设置长度
             if (betterCheckUnSetLengthType(column.getColumnType())) {
-                createTableBuilder.append(column.getColumnType() + " ");
+                createTableBuilder.append(column.getColumnType()).append(" ");
             } else {
-                createTableBuilder.append(column.getColumnType() + "(" + column.getColumnLength() + ")" + " ");
+                createTableBuilder.append(column.getColumnType()).append("(").append(column.getColumnLength()).append(")").append(" ");
             }
             createTableBuilder.append(",");
             // 设置comment
@@ -70,13 +72,15 @@ public class OracleSqlBuilderExecutor extends AbstractSqlBuilderExecutor {
         sqlList.addAll(commentList);
         //设置生成的SQL语句输出文本位置
         String filePath = properties.getProperty("sqlFilePath");
+        String dateFormat = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHH:mm:ss"));
+        String fileName = "createTable_" + dateFormat + ".sql";
         WriteTxtTool writeTxtTool = new WriteTxtTool();
         //将生成的sql语句，输出到文本中
         try {
-            writeTxtTool.writeFile(sqlList, filePath);
-            logger.info("{}-生成建表sql成功,查看文件:{}", table.getTableName(), filePath);
+            writeTxtTool.writeFile(sqlList, filePath + fileName);
+            logger.info("{}-生成建表sql成功,查看文件位置:{}", table.getTableName(), filePath);
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
 
         return sqlList;
@@ -137,10 +141,7 @@ public class OracleSqlBuilderExecutor extends AbstractSqlBuilderExecutor {
         }
         if (type.compareToIgnoreCase("FLOAT") == 0) {
             String floatSetting = properties.getProperty("type_float_auto");
-            if (floatSetting != null && floatSetting.equals("1")) {
-                return true;
-            }
-            return false;
+            return floatSetting != null && floatSetting.equals("1");
         }
         return false;
     }
